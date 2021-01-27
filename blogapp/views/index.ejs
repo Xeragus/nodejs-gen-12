@@ -4,6 +4,7 @@
   <% blogPosts.forEach(blogPost => { %>
     <div style="border: 1px solid gray; padding: 10px;">
       <a href="/blogposts/<%= blogPost._id %>">Edit</a>
+      <a href="javascript:;" onclick="deleteBlogPost(`<%= blogPost._id %>`)">Delete</a>
       <h4><a href="/<%= blogPost.slug %>"><%= blogPost.title %></a></h4>
       <p><%= blogPost.content %></p>
       <p>#<%= blogPost.view_count %> views</p>

@@ -56,5 +56,20 @@ router
 
       res.render('show', { blogPost: blogPost })
     })
+    .delete('/blogposts/:id', async (req, res) => {
+      let responseContent = {
+        error: false,
+        message: `Blog post with id ${req.params.id} is successfully removed`
+      }
+
+      try {
+        await BlogPost.findByIdAndDelete(req.params.id)
+      } catch (error) {
+        responseContent.error = true
+        responseContent.message = error.message
+      }
+
+      res.send(responseContent)
+    })
 
 module.exports = router;
