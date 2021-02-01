@@ -1,4 +1,5 @@
 const BlogPost = require('../models/BlogPost')
+const User = require('../models/User')
 
 module.exports = {
   getHomepage: async (req, res) => {
@@ -6,10 +7,18 @@ module.exports = {
 
     res.render('index', { title: 'Express', blogPosts: blogPosts });
   },
-  getCreate: (req, res) => {
-    res.render('create')
+  getCreate: async (req, res) => {
+    let users = []
+
+    try {
+      users = await User.find()
+    } catch (error) {
+      console.log(error);
+    }
+
+    res.render('create', { users: users })
   },
-  postCreate: async (req, res) => {
+  postCreate: async (req, res) => { 
     try {
       const blogPost = new BlogPost(req.body)
 
