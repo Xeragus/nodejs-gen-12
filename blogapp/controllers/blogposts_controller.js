@@ -1,10 +1,11 @@
 const BlogPost = require('../models/BlogPost')
 const User = require('../models/User')
+const faker = require('faker')
 
 module.exports = {
   getHomepage: async (req, res) => {
-    const blogPosts = await BlogPost.find()
-
+    const blogPosts = await BlogPost.find().populate('author', 'name').sort({view_count: -1})
+    console.log(blogPosts)
     res.render('index', { title: 'Express', blogPosts: blogPosts });
   },
   getCreate: async (req, res) => {
@@ -20,7 +21,11 @@ module.exports = {
   },
   postCreate: async (req, res) => { 
     try {
-      const blogPost = new BlogPost(req.body)
+      const blogPost = new BlogPost({
+        ...req.body, 
+        slug: faker.lorem.slug(),
+        author: req.body.author_id
+      })
 
       await blogPost.save()
     } catch (err) {

@@ -8,6 +8,7 @@
       <h4><a href="/<%= blogPost.slug %>"><%= blogPost.title %></a></h4>
       <p><%= blogPost.content %></p>
       <p>#<%= blogPost.view_count %> views</p>
+      <p>posted by <%= blogPost.author.name %></p>
     </div>
   <% }) %>
 <%- include('partials/footer') %>

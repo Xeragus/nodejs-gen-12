@@ -5,9 +5,9 @@
   Title: <input type="text" name="title" id="title"><br>
   Content: <input type="text" name="content" id="content">
   Author: 
-  <select name="author" id="">
+  <select name="author_id">
     <% users.forEach(user => { %>
-     <option value=""><%= user.name %></option>
+     <option value="<%= user._id %>"><%= user.name %></option>
     <% }) %>
   </select>
   <button type="submit">Submit</button>
